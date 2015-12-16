@@ -14,30 +14,25 @@ node solPath[MAX];
 
 bool promising (node v, int size, int idx)
 {
-	int idx_i;
-	bool result = true;
+	int i;
+	bool isPromising = true;
 
-	if (v.row == -1) {
-		return result;
-	}
-	// check vertical line
-	for (idx_i = 0; idx_i < v.row; idx_i++) {
-		if (v.col == solPath[idx_i].col) {
-			result = false;
+	for (i = 0; i < v.row; i++) {
+		if (v.col == solPath[i].col) {
+			isPromising = false;
 			break;
 		}
 	}
-	if (result) {
-		// check diagonal lines(right, left)
-		for (idx_i = 0; idx_i < v.row; idx_i++) {
-			if (ABS(solPath[idx_i].row - v.row) == ABS(solPath[idx_i].col - v.col)) {
-				result = false;
+	if (isPromising) {	
+		for (i = 0; i < v.row; i++) {
+			if (ABS(solPath[i].row - v.row) == ABS(solPath[i].col - v.col)) {
+				isPromising = false;
 				break;
 			}
 		}
 	}
 
-	return result;
+	return isPromising;
 }
 
 
