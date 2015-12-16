@@ -57,7 +57,7 @@ void checknode (node v, int size, int idx)
 			}
 			cout << endl;
 		}
-        else
+		else
 		{
 			for (i = 0; i < size; i++)
 			{
