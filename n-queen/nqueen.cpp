@@ -17,54 +17,63 @@ bool promising (node v, int size, int idx)
 	int i;
 	bool isPromising = true;
 
-	for (i = 0; i < v.row; i++) {
-		if (v.col == solPath[i].col) {
+
+	for (i = 0; i < v.row; i++)
+	{
+		if (v.col == solPath[i].col)
+		{
 			isPromising = false;
 			break;
 		}
 	}
-	if (isPromising) {	
-		for (i = 0; i < v.row; i++) {
-			if (ABS(solPath[i].row - v.row) == ABS(solPath[i].col - v.col)) {
+	if (isPromising)
+	{
+		for (i = 0; i < v.row; i++)
+		{
+			if (ABS(solPath[i].row - v.row) == ABS(solPath[i].col - v.col))
+			{
 				isPromising = false;
 				break;
 			}
 		}
 	}
-
 	return isPromising;
 }
 
-
 void checknode (node v, int size, int idx)
 {
-    int i;
-    if (promising(v, size, idx))
+	int i;
+	if (promising(v, size, idx))
 	{
-        if (idx == size - 1)
+		if(idx == -1)
 		{
-			for(i = 1; i < size; i++)
+
+		}
+		if (idx == size - 1)
+		{
+			for(i = 0; i < size; i++)
 			{
 				cout << "(" << solPath[i].row << ", " << solPath[i].col << ")" << " ";
 			}
 			cout << endl;
 		}
-         
-        else 
+        else
 		{
-            for (i = 0; i < size; i++) {
-				solPath[idx+1].col = i;
-				solPath[idx+1].row = idx + 1;
-				checknode(solPath[idx+1], size, idx+1);
-            }
+			for (i = 0; i < size; i++)
+			{
+				solPath[idx].col = i;
+				solPath[idx].row = idx;
+				checknode(solPath[idx], size, idx);
+			}
 		}
 	}
 }
 
 
-int main() {
+int main()
+{
 	int T;
-	int i, j;
+	int i;
 	int n;
 	node v;
 
@@ -74,10 +83,10 @@ int main() {
 	{
 		cin >> n;
 
-		v.row = 0;
-		v.col = 0;
+		v.row = -1;
+		v.col = -1;
 
-		checknode(v, n, 0);		
+		checknode(v, n, -1);		
 	}
 
 	return 0;
