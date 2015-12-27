@@ -1,1 +1,3 @@
-S/W Algorithm Study
+#S/W Algorithm Study
+
+Wednesday & Sunday / Week
