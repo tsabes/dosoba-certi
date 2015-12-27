@@ -1,3 +1,3 @@
 #S/W Algorithm Study
 
-Wednesday & Sunday / Week
+Wednesday & Sunday 22:00
