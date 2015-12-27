@@ -61,15 +61,22 @@ int main()
 		tmpNode.left = 0;
 		tmpNode.right = 0;
 
-		if(treeArr[tmp1].data == 0)
-			treeArr[tmp1] = tmpNode;
+		if(treeArr[tmp1].data == 0) {
+            treeArr[tmp1].data = tmpNode.data;
+            treeArr[tmp1].left = tmpNode.left;
+            treeArr[tmp1].right = tmpNode.right;
+        }
 
 		tmpNode.data = tmp2;
 		tmpNode.left = 0;
 		tmpNode.right = 0;
 
-		if(treeArr[tmp2].data == 0)
-			treeArr[tmp2] = tmpNode;
+		if(treeArr[tmp2].data == 0) {
+		    treeArr[tmp2] = tmpNode.data;
+            treeArr[tmp2].left = tmpNode.left;
+            treeArr[tmp2].right = tmpNode.right;
+        }
+
 
 		if(treeArr[tmp1].left == 0)
 		{
