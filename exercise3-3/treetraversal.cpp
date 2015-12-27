@@ -62,9 +62,9 @@ int main()
 		tmpNode.right = 0;
 
 		if(treeArr[tmp1].data == 0) {
-            treeArr[tmp1].data = tmpNode.data;
-            treeArr[tmp1].left = tmpNode.left;
-            treeArr[tmp1].right = tmpNode.right;
+			treeArr[tmp1].data = tmpNode.data;
+			treeArr[tmp1].left = tmpNode.left;
+			treeArr[tmp1].right = tmpNode.right;
         }
 
 		tmpNode.data = tmp2;
@@ -72,9 +72,9 @@ int main()
 		tmpNode.right = 0;
 
 		if(treeArr[tmp2].data == 0) {
-		    treeArr[tmp2] = tmpNode.data;
-            treeArr[tmp2].left = tmpNode.left;
-            treeArr[tmp2].right = tmpNode.right;
+			treeArr[tmp2].data = tmpNode.data;
+			treeArr[tmp2].left = tmpNode.left;
+			treeArr[tmp2].right = tmpNode.right;
         }
 
 
