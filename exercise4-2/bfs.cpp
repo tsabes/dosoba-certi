@@ -35,6 +35,7 @@ int main() {
         cin >> from;
         cin >> to;
         graph[from][to] = 1;
+        graph[to][from] = 1;
     }
 
     //BFS module start; G: graph[][] v: vertex(1)
@@ -62,7 +63,6 @@ int main() {
         }
     }
     cout << endl;
-    //BFS module end;
 }
 
 /*
