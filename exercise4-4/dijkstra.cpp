@@ -25,6 +25,7 @@ int main()
     int U[MAX];
     int visited[MAX];
     int distance[MAX];
+    int previous[MAX];
     int min_vertex, min_distance;
 
     // init start
@@ -44,6 +45,7 @@ int main()
     {
         U[i] = 0;
         visited[i] = 0;
+        previous[i] = 1;
         distance[i] = 0;
     }    
 
@@ -69,8 +71,6 @@ int main()
     visited[1] = 1; //flag
     num_path++;
 
-    //cout << "path : " << tr_itoa(1) << " ";
-
     for (i = 1; i <= num_vertex; i++)
     {
         distance[i] = graph[U[1]][i];
@@ -91,23 +91,56 @@ int main()
 
         U[++num_path] = min_vertex;
         visited[min_vertex] = 1;
-        //cout << tr_itoa(min_vertex) << " ";
-        
+                
         for (i = 1; i <= num_vertex; i++)
         {
-            distance[i] = MINIMUM(distance[i], distance[min_vertex] + graph[min_vertex][i]);
-            /*
-            if ((distance[i] > distance[min_vertex] + graph[min_vertex][i]) && graph[min_vertex][i] != -1)
+            //distance[i] = MINIMUM(distance[i], distance[min_vertex] + graph[min_vertex][i]);
+            if ((distance[i] > distance[min_vertex] + graph[min_vertex][i]) && graph[min_vertex][i] != -1
+                && visited[i] != 1)
             {
                 distance[i] = distance[min_vertex] + graph[min_vertex][i];
-                cout << tr_itoa(i) << " ";
-            }
-            */            
+                previous[i] = min_vertex;
+                
+            }                        
         }
     }
-    //cout << endl;
-    // Dijkstra module end
     
+    // Dijkstra module end
+
+    cout << "U : ";
+    for (i = 1; i <= num_vertex; i++)
+    {
+        cout << tr_itoa(U[i]) << " ";
+    }
+    cout << endl;
+
+    cout << "previous : ";
+    for (i = 1; i <= num_vertex; i++)
+    {
+        cout << tr_itoa(previous[i]) << " ";
+    }
+    cout << endl;
+
+    i = num_vertex;
+    j = 1;
+    int correct_path[MAX] = {0,};
+    correct_path[j] = num_vertex;
+
+    while(i != 1)
+    {
+        j++;
+        correct_path[j] = previous[i];
+        i = correct_path[j];
+    }
+    
+    cout << "path : ";
+    while (j >= 1)
+    {
+        cout << tr_itoa(correct_path[j]) << " ";
+        j--;
+    }
+    cout << endl;
+
     cout << "weight : " << distance[6] << endl;
 
     return 0;
