@@ -22,7 +22,7 @@ int main()
     int weight;
     int graph[MAX][MAX];
     int num_vertex, num_path;
-    int path[MAX];
+    int U[MAX];
     int visited[MAX];
     int distance[MAX];
     int min_vertex, min_distance;
@@ -30,14 +30,19 @@ int main()
     // init start
     for (i = 0; i < MAX; i++)    
     	for (j = 0; j < MAX; j++)
-    		graph[i][j] = INFINITY;
+        {
+            if(i == j)
+                graph[i][j] = -1;
+
+            graph[i][j] = INFINITY;
+        }
 
     num_vertex = 0;
     num_path = 0;
 
     for (i = 0; i < MAX; i++)
     {
-        path[i] = 0;
+        U[i] = 0;
         visited[i] = 0;
         distance[i] = 0;
     }    
@@ -60,13 +65,15 @@ int main()
 
     // Dijkstra module start
 
-    path[1] = 1;
-    visited[1] = 1;
+    U[1] = 1;
+    visited[1] = 1; //flag
     num_path++;
+
+    //cout << "path : " << tr_itoa(1) << " ";
 
     for (i = 1; i <= num_vertex; i++)
     {
-        distance[i] = graph[path[1]][i];
+        distance[i] = graph[U[1]][i];
     }
 
     while (num_path < num_vertex)
@@ -82,24 +89,25 @@ int main()
             }
         }
 
-        path[++num_path] = min_vertex;
+        U[++num_path] = min_vertex;
         visited[min_vertex] = 1;
+        //cout << tr_itoa(min_vertex) << " ";
         
         for (i = 1; i <= num_vertex; i++)
         {
             distance[i] = MINIMUM(distance[i], distance[min_vertex] + graph[min_vertex][i]);
+            /*
+            if ((distance[i] > distance[min_vertex] + graph[min_vertex][i]) && graph[min_vertex][i] != -1)
+            {
+                distance[i] = distance[min_vertex] + graph[min_vertex][i];
+                cout << tr_itoa(i) << " ";
+            }
+            */
         }
     }
-
+    //cout << endl;
     // Dijkstra module end
     
-    cout << "path : ";
-    for (i = 1; i <= num_vertex; i++)
-    {
-        if(visited[i] == 1)
-            cout << tr_itoa(i) << " ";
-    }
-    cout << endl;
     cout << "weight : " << distance[6] << endl;
 
     return 0;
