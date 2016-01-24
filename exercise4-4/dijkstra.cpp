@@ -102,7 +102,7 @@ int main()
                 distance[i] = distance[min_vertex] + graph[min_vertex][i];
                 cout << tr_itoa(i) << " ";
             }
-            */
+            */            
         }
     }
     //cout << endl;
