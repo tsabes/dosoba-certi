@@ -23,9 +23,9 @@ int main()
     int graph[MAX][MAX];
     int num_vertex, num_path;
     int path[MAX];
+    int visited[MAX];
     int distance[MAX];
     int min_vertex, min_distance;
-    int value;
 
     // init start
     for (i = 0; i < MAX; i++)    
@@ -34,12 +34,11 @@ int main()
 
     num_vertex = 0;
     num_path = 0;
-    value = 0;
-    min_distance = INFINITY;    
 
     for (i = 0; i < MAX; i++)
     {
         path[i] = 0;
+        visited[i] = 0;
         distance[i] = 0;
     }    
 
@@ -55,13 +54,14 @@ int main()
     	to_int = tr_atoi(to_char);
 
     	graph[from_int][to_int] = weight;
-        num_vertex = MAXIMUM(num_vertex, from_int);
+        num_vertex = MAXIMUM(num_vertex, to_int);
     }
     // init end
 
     // Dijkstra module start
 
     path[1] = 1;
+    visited[1] = 1;
     num_path++;
 
     for (i = 1; i <= num_vertex; i++)
@@ -69,22 +69,25 @@ int main()
         distance[i] = graph[path[1]][i];
     }
 
-    for (i = 1; i <= num_vertex; i++)
-    {
-        if (MINIMUM(min_distance, distance[i]) == distance[i])
-        {
-            min_distance = distance[i];
-            min_vertex = i;
-        }
-    }
-
     while (num_path < num_vertex)
     {
+        min_distance = INFINITY;
+
+        for (i = 1; i <= num_vertex; i++)
+        {
+            if ((MINIMUM(min_distance, distance[i]) == distance[i]) && visited[i] != 1)
+            {
+                min_distance = distance[i];
+                min_vertex = i;
+            }
+        }
+
         path[++num_path] = min_vertex;
+        visited[min_vertex] = 1;
         
         for (i = 1; i <= num_vertex; i++)
         {
-            
+            distance[i] = MINIMUM(distance[i], distance[min_vertex] + graph[min_vertex][i]);
         }
     }
 
@@ -93,10 +96,11 @@ int main()
     cout << "path : ";
     for (i = 1; i <= num_vertex; i++)
     {
-        cout << tr_itoa(path[i]) << " ";
+        if(visited[i] == 1)
+            cout << tr_itoa(i) << " ";
     }
     cout << endl;
-    cout << "weight : " << value << endl;
+    cout << "weight : " << distance[6] << endl;
 
     return 0;
 }
