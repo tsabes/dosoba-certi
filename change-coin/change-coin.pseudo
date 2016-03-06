@@ -1,0 +1,34 @@
+
+change(int n)
+{
+    int coins;
+    
+    if(n == 0)
+    {
+        coin = 0;
+        return coin;
+    }
+    else if (n < 5)
+    {
+        coin = change(n-1) + 1;
+        return coin;
+    }
+    else if ( 5 <= n < 10)
+    {
+        coin = min((change(n-1)+1),(change(n-5)+1));
+        return coin;
+    }
+    else if ( 10 <= n < 16)
+    {
+        coin = min((change(n-1)+1),(change(n-5)+1));
+        coin = min(coin, change(n-10)+1);
+        return coin;
+    }
+    else //if ( 16 <= n )
+    {
+        coin = min((change(n-1)+1),(change(n-5)+1));
+        coin = min(coin, change(n-10)+1);
+        coin = min(coin, change(n-16)+1);
+        return coin;
+    }
+}
